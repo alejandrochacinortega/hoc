@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import reducers from './reducers';
 import Resources from './components/Resources';
+import requireAuth from './components/require_authentication';
 
 import { Router, Route, browserHistory} from 'react-router';
 
@@ -16,28 +17,10 @@ ReactDOM.render(
     <Provider store={createStoreWithoutMiddleware(reducers)}>
         <Router history={browserHistory}>
             <Route path='/' component={App}>
-                <Route path='resources' component={Resources} />
+                <Route path='resources' component={requireAuth(Resources)} />
             </Route>
         </Router>
     </Provider>,
     document.getElementById('root')
 );
 
-
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import {Provider} from 'react-redux';
-// import {createStore, applyMiddleware} from 'redux';
-// import ReduxPromise from 'redux-promise';
-//
-//
-// import App from './components/app';
-// import reducers from './reducers';
-//
-// const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
-//
-// ReactDOM.render(
-//     <Provider store={createStoreWithMiddleware(reducers)}>
-//         <App />
-//     </Provider>
-//     , document.querySelector('.container'));
